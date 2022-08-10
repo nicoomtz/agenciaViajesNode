@@ -589,3 +589,67 @@ Y lo importamos :
 
 y para usar la variable:
   proccess.env.DB_HOST
+
+
+para hacer deploy del proyecto a heroku debemos ejecutar las siguientes lineas de comandos:
+
+una vez ubicado en el proyecto:
+  heroku login
+  heroku create
+  git push heroku main
+
+En nuestro package.json debemos definir un nuevo script llamado:
+
+  "start": "node index.js"
+
+Y en la consola de heroku ejecutar:
+  npm run start
+
+
+
+
+Luego por ultimo debemos subir la base de datos
+
+Para esto vamos a nuestro proyecto en la pagina de Heroku>Resources>Add-ons y agregamos ClearDB MySQL
+
+Luego settings > reveal config vars > y copiamos el url de nuestro database.
+Creamos un nuevo archivo
+
+Y vamos a separar en lineas nuestro url:
+
+//Usuario
+  b531ddb1e1dcaa
+
+//Password
+  8d5f156b
+
+//Servidor
+  us-cdbr-east-06.cleardb.net
+
+//Base de datos
+  heroku_695a606ff107799
+
+Por ultimo en ese mismo lugar de config vamos a registrar cada una de nuestras variables.
+
+DB_HOST = VALOR
+DB_NAME = VALOR
+
+Y asi cada una de nuestras variables de entorno
+
+**Es importante que estén en el mismo orden**
+
+Una vez que declaramos las variables debemos exportar las tablas que estemos usando desde nuestra bd, con tableplus.
+Seleccionamos SQL y export.
+
+Y una vez exportado:
+Creamos una nueva conexion en tableplus de mySQL llamada HerokuProd
+Con las configuraciones de nuestro heroku (
+  Usuario
+b531ddb1e1dcaa
+Pass
+8d5f156b
+Servidor
+us-cdbr-east-06.cleardb.net
+Database
+heroku_695a606ff107799
+)
